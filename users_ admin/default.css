@@ -1,0 +1,87 @@
+body { 
+	font-family: "Verdana"; font-size: 20px;
+}
+a {
+	text-decoration: none;
+}
+td, th {
+	padding: 8px;
+}
+th {
+	color: #929288;
+}
+h1 {
+	margin-left: 10px;
+}
+table {
+	margin-bottom: 50px;
+}
+.new a {
+	background: #adad85;	
+	color: white;
+	font-size: 35px;
+	padding: 20px 15px;
+	margin-left: 10px;
+}
+.edit-link {
+	color: green;
+}
+.delete-link {
+	color: red;
+}
+.edit-link:hover {
+	border-bottom: 2px solid green
+}
+.delete-link:hover {
+	border-bottom: 2px solid red
+}
+#edit {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	align-self: left;
+
+	background: white;
+	padding: 40px;
+
+	font-size: 15px;
+	font-weight: bold;
+
+	position: absolute;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+
+	visibility: hidden;
+}
+#edit.active {
+	visibility: visible;
+}
+#edit input {
+	font-size: 50px;
+}
+#edit .btm{
+	color: white;
+	font-size: 35px;
+	font-weight: normal;
+	padding: 10px;
+}
+#two-btm  {
+	align-self: flex-start;
+	margin-left: 395px;
+	margin-top: 50px;
+}
+a#cancel-link {
+	background: #adad85;	
+}
+a#save-link  {
+	background: cyan;
+}
+#edit input:focus {
+	border-color: cyan;
+}
+.template {
+	visibility: hidden;
+}

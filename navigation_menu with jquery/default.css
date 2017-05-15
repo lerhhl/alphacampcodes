@@ -1,0 +1,39 @@
+body { font-family: Verdana; }
+ul {
+  list-style-type: none;
+}
+ul li {
+  float: left;
+}
+ul li a {
+  display: inline-block;
+  text-align: center;
+  width: 10vw;
+  background: #333333;
+  color: white;
+  padding: 20px 30px;
+  cursor: pointer;
+  text-decoration: none;
+}
+ul li a:hover {
+  background: white;
+  color: #333333;
+  transition: all 0.5s;
+}
+main {
+  display: block;
+  width: 150px;
+  margin: auto auto;
+  font-size: 30px;
+}
+ul li a.active {
+  background: #A9DB73;
+}
+
+.page {
+  display: none;
+}
+
+.page.active {
+  display: block;
+}

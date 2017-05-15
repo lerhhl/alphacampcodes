@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+  <head>
+      <title>Page 1</title></title>
+      <meta charset="UTF-8">
+<!--      <link rel="stylesheet" type="text/css" href="default.css"> -->
+      <style>
+        body { font-family: Verdana; }
+        ul {
+          list-style-type: none;
+        }
+        ul li {
+        }
+        ul li a {
+          display: inline-block;
+          text-align: center;
+          width: 10vw;
+          background: #333333;
+          color: white;
+          padding: 20px 30px;
+          cursor: pointer;
+          text-decoration: none;
+        }
+        ul li a:hover {
+          background: white;
+          color: #333333;
+          transition: all 0.5s;
+        }
+        ul li a.active {
+          background: #A9DB73;
+        }
+        main {
+          display: block;
+          width: 150px;
+          margin: auto auto;
+          font-size: 30px;
+        }
+        .page {display: none;}
+        
+        .page.active {
+          display: block;
+        }
+       </style>
+  </head>
+  <body>
+    <header>
+      <ul>
+        <li><a class="active" href="#" data-page="#page1">Page 1</a></li>
+        <li><a href="#" data-page="#page2">Page 2</a></li>
+        <li><a href="#" data-page="#page3">Page 3</a></li>
+        <li><a href="#" data-page="#page4">Page 4</a></li>
+        <li><a href="#" data-page="#page5">Page 5</a></li>
+      </ul>
+    </header>
+    <main id="content">
+      <div id="page1" class="page active"> PAGE1 </div>
+      <div id="page2" class="page"> PAGE2 </div>
+      <div id="page3" class="page"> PAGE3 </div>
+      <div id="page4" class="page"> PAGE4 </div> 
+      <div id="page5" class="page"> PAGE5 </div>             
+    </main>
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.min.js"
+      integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+      crossorigin="anonymous"></script>
+    <script>  
+      $(document).ready(function(){
+        $("ul li a").click(function() {
+          console.log("Clicked on li");
+
+          //Hide everything
+          $("a").removeClass("active");
+          $(".page").removeClass("active");
+
+          //get link          
+          var $a = $(this)
+
+          //activate link
+          $a.addClass("active");
+
+          //activate page
+          var pageId = $a.data("page");
+          $(pageId).addClass("active");
+        });
+      });
+    </script>       
+    </body>
+</html>

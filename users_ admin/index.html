@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta charset = "UTF-8">
+	<title>Users Adminstration</title>
+	<link rel = "stylesheet" type="text/css" href = "default.css">
+</head>
+
+<body>
+<h1>Users</h1>
+	<table class = "Users">
+	  <tr>
+	    <th data-sortby = "firstname">Firstname</th>
+	    <th data-sortby = "lastname">Lastname</th> 
+	    <th data-sortby = "age">Age</th>
+	    <th></th>
+	    <th></th>
+	  </tr>
+	  <tr class = "user">
+	    <td class = "firstname">Jill</td>
+	    <td class = "lastname">Smith</td> 
+	    <td class = "age">50</td>
+	    <td><a href = "#" class = "edit-link">Edit</a></td>
+	    <td><a href = "#" class = "delete-link">Delete</a></td>
+	  </tr>
+	  <tr class = "user">
+	    <td class = "firstname">Eve</td>
+	    <td class = "lastname">Jackson</td> 
+	    <td class = "age">94</td>
+	    <td><a href = "#" class = "edit-link">Edit</a></td>
+	    <td><a href = "#" class = "delete-link">Delete</a></td>	    
+	  </tr>
+	  </table>
+	<table id = "template_table">
+	  <tr class = "template">
+	    <td class = "firstname">firstname</td>
+	    <td class = "lastname">lastname</td> 
+	    <td class = "age">age</td>
+	    <td><a href = "#" class = "edit-link">Edit</a></td>
+	    <td><a href = "#" class = "delete-link">Delete</a></td>	    
+	  </tr>
+	</table>
+
+	<div class = "new">
+		<a href = "#" class = "new-link">Create new User</a>	
+	</div>
+
+	<div id = "edit">
+		<p>First name<br/><input id = "fname_input" type = "text" name = "lname" size = "15"></input></p>
+		<p>Last name<br/><input id = "lname_input" type = "text" name = "lname" size = "15"></input></p>
+		<p>Age<br/><input id = "age_input" type = "num" name = "age" size = "15"></input></p>
+		<div id = "two-btm">
+			<a href = "#" id = "save-link" class = "btm">Save</a>
+			<a href = "#" id = "cancel-link" class = "btm">Cancel</a>
+		</div>
+	</div>
+	<script
+	  src="https://code.jquery.com/jquery-3.2.1.min.js"
+	  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+	  crossorigin="anonymous"></script>
+	<script>
+	// Run after the document is loaded (jquery onload, jquery ready)
+		$(document).ready(function(){
+			function edit() { 
+				console.log("Clicked on .edit-link");
+				//Make #edit visible
+				$("#edit").addClass("active");
+				//Load existing user values
+				var $user = $(this).closest(".user");
+				$($user).addClass("updating")
+				var fname_value = $user.find(".firstname").html();
+				var lname_value = $user.find(".lastname").html();
+				var age_value = $user.find(".age").html();
+				//Show existing user values
+				$("#fname_input").val(fname_value);
+				$("#lname_input").val(lname_value);
+				$("#age_input").val(age_value);
+				$new_user = 0;				
+			}
+
+			function del() {
+				console.log("Clicked on .delete-link");
+				var $user = $(this).closest(".user");
+				var fname_value = $user.find(".firstname").html();
+				var lname_value = $user.find(".lastname").html();
+				if (confirm("Are you sure you want to delete " + fname_value + " " + lname_value + "?") == true) {
+					$user.remove();}
+				$new_user = 0;
+			}
+
+			// Edit link
+			$(".edit-link").click(edit)
+
+			// Delete link
+			$(".delete-link").click(del)
+
+			// New link
+			$(".new-link").click(function() {
+				console.log("Clicked on .new-link");
+				//Make #edit visible				
+				$("#edit").addClass("active");			
+				//Create a new user
+				$newUser = $(".template").clone().addClass("updating").removeClass("template");
+				//Assign edit and del function to the ".edit-link" & ".delete-link"
+				$newUser.find(".edit-link").click(edit)
+				$newUser.find(".delete-link").click(del)
+				//Add the new_user row
+				$(".Users").append($newUser);
+				//Initialise the input boxes
+				$("#fname_input").val("");
+				$("#lname_input").val("");
+				$("#age_input").val("");
+				//Indicate a new user input
+				$new_user = 1;
+			});
+
+			// Save link
+			$("#save-link").click(function() {
+				console.log("Clicked on #save-link");
+				//Capture the values in the input boxes
+				var fname_value = $('#fname_input').val();
+				var lname_value = $('#lname_input').val();
+				var age_value = $('#age_input').val();
+				//Update new values to the table
+				$(".updating .firstname").html(fname_value);
+				$(".updating .lastname").html(lname_value);
+				$(".updating .age").html(age_value);
+				//Formalise the new row
+				$(".updating").addClass("user").removeClass("updating");
+				//Make #edit hidden				
+				$("#edit").removeClass("active");
+			});		
+
+			// Cancel link
+			$("#cancel-link").click(function() {
+				console.log("Clicked on #cancel-link");
+				//Remove empty row when cancel to create new user
+				if ($new_user == 1) { $(".updating").remove(); }
+				//undo any changes for editing existing user values
+				else { $(".updating").removeClass("updating"); }
+				//Make #edit hidden
+				$("#edit").removeClass("active");	
+			});
+		});
+	</script>
+</body>
+
+</html>
